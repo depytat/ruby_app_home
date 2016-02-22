@@ -14,8 +14,16 @@
 ActiveRecord::Schema.define(version: 20160216211613) do
 
   create_table "items", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "price"
+    t.string   "name"
+    t.boolean  "real"
+    t.float    "weight"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+
+  add_index "items", ["name"], name: "index_items_on_name"
+  add_index "items", ["price"], name: "index_items_on_price"
 
 end
