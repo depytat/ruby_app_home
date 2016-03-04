@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160303214513) do
   add_index "items", ["price"], name: "index_items_on_price"
 
   create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
