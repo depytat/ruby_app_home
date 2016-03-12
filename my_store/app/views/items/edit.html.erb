@@ -1,0 +1,8 @@
+<h1>Редактирование товара</h1>
+<%= form_for @item do |f| %>
+	<%= render partial: "form", locals: { f: f } %>
+	<%= f.submit "Сохранить товар" %>
+
+	<%= link_to "Удалить товар", item_path(@item), method: :delete, data: { confirm: "Уверены?" } %>
+	<%= link_to "Активировать товар", activate_item_path(@item), method: :post, data: { confirm: "Точно активировать товар?" } %>
+<% end %>

@@ -53,4 +53,27 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # get ':controller(/:action(/:id))'
+
+  # Обратите внимание на множественное число
+  # в названии метода (s на конце) - именно resourceS
+  # resources :items
+
+  resources :items do
+    member do
+      post :activate
+    end
+  end
+
+  resources :items do
+    member do
+      post :activate
+    end
+    collection do
+      get :top
+    end
+  end
+  
 end
+

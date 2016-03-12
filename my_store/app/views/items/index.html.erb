@@ -1,0 +1,24 @@
+<!-- <h1>Все товары</h1>
+
+<ul>
+<% @items.each do |i| %>
+	<li><%= link_to i.title, i %></li>
+<% end %>
+</ul>
+
+<%= will_paginate @items %> -->
+
+<h1>Все товары</h1>
+
+<p> Сортировка:
+	<%= link_to "Новые сверху", items_path(order: "desc") %> |
+	<%= link_to "Старые сверху", items_path(order: "asc") %>
+</p>
+
+<ul>
+	<% @items.each do |i| %>
+		<li><%= link_to i.title, i %></li>
+	<% end %>
+</ul>
+
+<%= will_paginate @items %>
