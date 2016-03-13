@@ -1,4 +1,13 @@
 class ItemsController < ApplicationController
+
+	# before_filter :has_admin_privileges?, only: [:new, :create, :edit, :update, :destroy]
+	before_filter :has_admin_privileges?, except: [:index, :show]
+
+	before_filter :find_item, only: [:show, :edit, :update, :destroy]
+
+
+
+
 	# def hello
 	# 	# Следующая строка выведет в браузер приветствие
 	# 	# (пока никакого html, просто текст)
@@ -48,15 +57,26 @@ class ItemsController < ApplicationController
 	end
 
 	def show
-		@item = Item.find(params[:id])
+		# @category = Category.find(params[:category_id])
+		render_404 and return unless @item.category_id == params[:category_id]
 	end
 
 	def new
 		@item = Item.new
 	end
 
+	# def create
+	# 	# @item = Item.create(params[:item])
+	# 	item_params = params.require(:item).permit(:name, :description, :price, :weight)
+	# 	@item = Item.create(item_params)
+	# 	if @item.errors.empty?
+	# 		redirect_to @item
+	# 	else
+	# 		render "new"
+	# 	end
+	# end
+
 	def create
-		# @item = Item.create(params[:item])
 		item_params = params.require(:item).permit(:name, :description, :price, :weight)
 		@item = Item.create(item_params)
 		if @item.errors.empty?
@@ -67,12 +87,10 @@ class ItemsController < ApplicationController
 	end
 
 	def edit
-		@item = Item.find(params[:id])
 	end
 
 	def update
 		item_params = params.require(:item).permit(:name, :description, :price, :weight)
-		@item = Item.find(params[:id])
 		@item.update_attributes(item_params)
 		if @item.errors.empty?
 			redirect_to @item
@@ -82,7 +100,6 @@ class ItemsController < ApplicationController
 	end
 
 	def destroy
-		@item = Item.find(params[:id])
 		@item.destroy
 		redirect_to items_path
 	end
@@ -96,4 +113,25 @@ class ItemsController < ApplicationController
 	def top
 		@items = Item.where(active: true).order('rating DESC').limit(10)
 	end
+
+	private
+
+		def has_admin_privileges?
+			# unless current_user
+			# 	redirect_to "/users/sign_in" and return
+			# end
+
+			# unless current_user.admin
+			# 	render(file: "public/403.html", status: "403.html") and return
+			# end
+			# true
+
+			redirect_to "/users/sign_in" unless current_user
+			render(file: "public/403.html",
+			status: "403.html") unless current_user.admin
+		end
+
+		def find_item
+			@item = Item.find(params[:id])
+		end
 end

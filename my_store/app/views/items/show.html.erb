@@ -1,3 +1,12 @@
-<h1><%= @item.name %></h1>
+<!-- <h1><%= @item.name %></h1>
+<p>Описание: <%= @item.description %></p>
+<p>Цена: <b><%= @item.price %></b></p> -->
+
+
+
+
+
+<h1><%= @item.title %></h1>
 <p>Описание: <%= @item.description %></p>
 <p>Цена: <b><%= @item.price %></b></p>
+<%= link_to "Редактировать", edit_item_path(@item) if can_edit_item?(@item) %>

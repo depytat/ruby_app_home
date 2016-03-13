@@ -37,4 +37,8 @@ class Item < ActiveRecord::Base
 		# after_destroy do
 		# 	category.inc!(:items_count, -1)
 		# end
+
+	def homepage=(url)
+		write_attribute :homepage, url.sub('http://', '')
+	end	
 end

@@ -60,20 +60,31 @@ Rails.application.routes.draw do
   # в названии метода (s на конце) - именно resourceS
   # resources :items
 
-  resources :items do
-    member do
-      post :activate
+  # resources :items do
+  #   member do
+  #     post :activate
+  #   end
+  # end
+
+  # resources :items do
+  #   member do
+  #     post :activate
+  #   end
+  #   collection do
+  #     get :top
+  #   end
+  # end
+
+  resources :categories do
+    resources :items do
+      member do
+        post :activate
+      end
+      collection do
+        get  :top
+      end
     end
   end
 
-  resources :items do
-    member do
-      post :activate
-    end
-    collection do
-      get :top
-    end
-  end
-  
 end
 
