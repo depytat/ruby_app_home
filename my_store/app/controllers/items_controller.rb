@@ -1,5 +1,15 @@
 class ItemsController < ApplicationController
 
+	# -------------------------------------------------------------
+	# Сначала find_item, затем disallow_access_if_no_editing_rights
+	# -------------------------------------------------------------
+	before_filter :find_item, on: [:show, :edit, :update, :destroy]
+	before_filter :disallow_access_if_no_editing_rights, except: [:index, :show]
+	# ------------------------------------------------
+	# Делаем доступным метод can_edit_item? в шаблонах
+	# ------------------------------------------------
+	helper_method :can_edit_item?
+
 	# before_filter :has_admin_privileges?, only: [:new, :create, :edit, :update, :destroy]
 	before_filter :has_admin_privileges?, except: [:index, :show]
 
@@ -86,7 +96,10 @@ class ItemsController < ApplicationController
 		end
 	end
 
+	# Этот экшен доступен только администраторам,
+	# значит рендерим его в администраторском лэйауте.
 	def edit
+		render layout: "admin"
 	end
 
 	def update
@@ -116,22 +129,22 @@ class ItemsController < ApplicationController
 
 	private
 
-		def has_admin_privileges?
-			# unless current_user
-			# 	redirect_to "/users/sign_in" and return
-			# end
-
-			# unless current_user.admin
-			# 	render(file: "public/403.html", status: "403.html") and return
-			# end
-			# true
-
-			redirect_to "/users/sign_in" unless current_user
-			render(file: "public/403.html",
-			status: "403.html") unless current_user.admin
-		end
 
 		def find_item
 			@item = Item.find(params[:id])
+		end
+
+		def can_edit_item?(item)
+			current_user && (current_user.admin || item.category.administrator == current_user)
+		end
+
+		def disallow_access_if_no_editing_rights
+			unless current_user
+				redirect_to "/users/sign_in"
+			end
+
+			unless can_edit_item?(@item)
+				render(file: "public/403.html", status: "403.html")
+			end
 		end
 end

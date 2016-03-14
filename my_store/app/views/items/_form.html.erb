@@ -1,4 +1,16 @@
-<%= f.text_field :name %>
+<!--<%= f.text_field :name %>
 <%= f.text_field :description %>
 <%= f.text_field :price %>
-<%= f.text_field :weight %>
+<%= f.text_field :weight %>-->
+
+<div class="input string optional">
+	<label class="string optional" for="item_name">Name</label>
+	<input class="string optional" id="item_name" maxlength="255" name="item[name]" size="50" type="text"/>
+</div>
+
+<div class="input text optional">
+	<label class="text optional" for="item_description">
+		Description
+	</label>
+	<textarea class="text optional" cols="40" id="item_description"	name="item[description]" rows="20"></textarea>
+</div>

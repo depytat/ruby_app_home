@@ -15,10 +15,6 @@
 	<%= link_to "Старые сверху", items_path(order: "asc") %>
 </p>
 
-<ul>
-	<% @items.each do |i| %>
-		<li><%= link_to i.title, i %></li>
-	<% end %>
-</ul>
+<%= render partial: "items/items_list", locals: { items: @items } %>
 
 <%= will_paginate @items %>

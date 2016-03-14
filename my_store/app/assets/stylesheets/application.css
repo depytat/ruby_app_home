@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+$colors_red : &960000;
+$colors_pink : &ffb8b8;
+$colors_gray : &aaa;
+$colors_light_gray : &a7a7a7;
+$colors_text : &000;
+
+.input {
+	margin-top: 1.5em;
+	clear: both; 
+	line-height: 100%;
+}
+
+label { 
+	display: block; 
+	font-size: 85%; 
+	abbr { 
+		display: none;
+	} 
+	textarea { 
+		height: 100px; 
+		line-height: 120%; 
+		font-size: 80%; 
+	}
+}
+
+.hint { color: $colors_gray; font-size: 80%; display: block; line-height:
+100%; margin-bottom: 1em; }
+
+input.string, 
+input.password, 
+textarea { font-size: 1em; padding:
+3px; width: 100%; display: inline-block; border: solid 1px $colors_light_gray;
+}
+
+.field_with_errors {
+	input, 
+	textarea { 
+		background-color: #ffdcdc; 
+	}
+	.hint { 
+		margin-bottom: 0; 
+	}
+}
+.error_notification { 
+	display: none; 
+}
+
+form {
+	margin-bottom: 0 0 1em 0; 
+	width: 400px; 
+	padding-right: 10px;
+	.error { 
+		color: $colors_red; f
+		ont-size: 80%; 
+		margin-bottom: 1em; 
+		clear: both; 
+		display: block; 
+	}
+	label { 
+		color: $colors_text; 
+	}
+}
