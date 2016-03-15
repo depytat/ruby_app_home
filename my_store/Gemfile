@@ -48,3 +48,10 @@ end
 gem 'will_paginate'
 
 gem 'simple_form'
+
+gem 'frontend_notifier'
+
+group :test do
+	gem 'rspec-rails'
+	gem 'factory_girl'
+end	

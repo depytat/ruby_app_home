@@ -28,14 +28,19 @@ ActiveRecord::Schema.define(version: 20160310230110) do
   add_index "carts_items", ["item_id", "cart_id"], name: "index_carts_items_on_item_id_and_cart_id"
 
   create_table "categories", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "items_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "images", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
+
+  add_index "images", ["imageable_id", "imageable_type"], name: "index_images_on_imageable_id_and_imageable_type"
 
   create_table "items", force: :cascade do |t|
     t.float    "price"
@@ -70,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160310230110) do
   create_table "users", force: :cascade do |t|
     t.string   "login"
     t.string   "email"
+    t.boolean  "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

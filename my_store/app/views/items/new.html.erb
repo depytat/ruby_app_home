@@ -1,3 +1,7 @@
+<p class="errorMessage">
+	<%= flash[:error] %>
+</p>
+
 <h1>Создание нового товара</h1>
 <%= simple_form_for do |f| %>
 	<%= render partial: "form", locals: { f: f } %>

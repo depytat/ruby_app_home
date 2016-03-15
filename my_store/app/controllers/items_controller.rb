@@ -90,8 +90,10 @@ class ItemsController < ApplicationController
 		item_params = params.require(:item).permit(:name, :description, :price, :weight)
 		@item = Item.create(item_params)
 		if @item.errors.empty?
+			flash[:success] = "Item created!"
 			redirect_to @item
 		else
+			flash.now[:error] = "You have errors in your form, please fix them and resubmit!"
 			render "new"
 		end
 	end

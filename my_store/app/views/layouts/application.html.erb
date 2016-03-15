@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render partial: "shared/frontend_notifier" %>
 	<header>
 		<% if current_user %>
 			Вы залогинены как <b><%= current_user.login %></b>.
@@ -16,7 +17,10 @@
 		<% end %>
 	</header>
 
-<%= yield %>
+	<p class="successMessage"><%= flash[:success] %></p>
+	<p class="errorMessage"> <%= flash[:error] %></p>
+
+	<%= yield %>
 
 </body>
 </html>

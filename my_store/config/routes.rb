@@ -86,7 +86,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to => "pages#frontpage"
+  root to: "pages#frontpage"
 
 end
 
